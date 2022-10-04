@@ -12,13 +12,13 @@ GRANT ALL PRIVILEGES ON *.* TO 'human'@'%';
 -- 구직자(유저) 
 CREATE TABLE user (
 	user_id int auto_increment PRIMARY KEY,
-	user_username VARCHAR(50) UNIQUE NOT null,
-	user_password VARCHAR(50) NOT null,
-	user_name VARCHAR(50),
-	user_email VARCHAR(120) UNIQUE NOT null,
-	user_phone_number VARCHAR(100) UNIQUE NOT null,
-	user_category VARCHAR(80)
-	user_created_at TIMESTAMP
+	username VARCHAR(50) UNIQUE NOT null,
+	password VARCHAR(50) NOT null,
+	name VARCHAR(50),
+	email VARCHAR(120) UNIQUE NOT null,
+	phone_number VARCHAR(100) UNIQUE NOT null,
+	category VARCHAR(80)
+	created_at TIMESTAMP
 );
 
 -- 구직자-분야 관계 테이블
