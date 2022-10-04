@@ -2,6 +2,9 @@ package site.metacoding.humancloud.domain.user;
 
 import java.sql.Timestamp;
 
+import lombok.Getter;
+
+@Getter
 public class User {
     private Integer userId;
     private String userUsername;
