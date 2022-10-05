@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class Resume {
 	public Integer resumeId;
+	public String resumeTitle;
 	public String resumeEducation;
 	public String resumeCareer;
 	public String resumePhoto;
