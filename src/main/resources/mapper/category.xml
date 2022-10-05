@@ -2,27 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.humancloud.domain.category.CategoryDao">
 	
-	<insert id="save">
-        insert into user(username, password, name, email, phone_number, category, created_at)
-        values (#{username}, #{password}, #{name}, #{email}, #{phone_number}, #{category}, now())
+	<insert id="save">     
+		insert into category(category_user_id, category_company_id, category_name)
+		values (#{categoryUserId}, #{categoryCompanyId}, #{categoryName});
 	</insert>
 
 	<select id="findById" resultType="site.metacoding.humancloud.domain.category.Category">
-        select * from user where user_id=#{userId}
+        select * from category where category_id=#{categoryId}
 	</select>
 	
 	<select id="findAll" resultType="site.metacoding.humancloud.domain.category.Category">
-        select * from user
+        select * from category
 	</select>
 	
 	<delete id="deleteById">
-        delete from user where user_id=#{userId}
+        delete from category where category_id=#{categoryId}
 	</delete>
 
 	<update id ="update">
-        update user set username=#{username}, password=#{password}, email= #{email}, phone_number=#{phone_number},
-        category=#{category} 
-        where user_id=#{userId}
+        update category set category_user_id=#{userId}, category_company_id#{companyId}, category_name=#{companyName}
+        where category_id=#{categoryId}
 	</update>
 	
 </mapper>

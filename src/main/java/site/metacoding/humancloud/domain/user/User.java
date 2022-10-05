@@ -3,7 +3,6 @@ package site.metacoding.humancloud.domain.user;
 import java.sql.Timestamp;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class User {

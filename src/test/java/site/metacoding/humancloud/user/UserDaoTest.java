@@ -47,25 +47,23 @@ public class UserDaoTest {
         assertEquals(3, userListPS.size());
     }
 
-    // // Junit은 메서드 실행직전에 트랜잭션이 걸리고, 메서드 실행이 끝나면 rollback 됨.
-    // // MyBatis는 ResultSet을 자바 Entity로 변경해줄때, 빈생성자를 호출하고 setter가 없어도 값을 매핑해준다.
-    @Test
-    public void insert_test() {
-        // given
-        String username = "yu";
-        String password = "123";
-        String name= "yujin";
-        String email = "yujin09@gmail.com";
-        String phoneNumber = "01099966462";
+    // @Test
+    // public void insert_test() {
+    //     // given
+    //     String username = "yu";
+    //     String password = "123";
+    //     String name= "yujin";
+    //     String email = "yujin09@gmail.com";
+    //     String phoneNumber = "01099966462";
         
-        User user = new User(username, password, username, email, phoneNumber);
+    //     User user = new User(username, password, username, email, phoneNumber);
 
-        // when
-        int result = userDao.save(user);
+    //     // when
+    //     int result = userDao.save(Joi);
 
-        // then
-        assertEquals(1, result);
-    } // rollback
+    //     // then
+    //     assertEquals(1, result);
+    // } // rollback
 
     @Test
     public void update_test() {
@@ -102,5 +100,4 @@ public class UserDaoTest {
         // then
         assertEquals(1, result);
     }
-
 }
