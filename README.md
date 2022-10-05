@@ -17,28 +17,16 @@ CREATE TABLE user (
 	name VARCHAR(50),
 	email VARCHAR(120) UNIQUE NOT null,
 	phone_number VARCHAR(100) UNIQUE NOT null,
-	category VARCHAR(80)
 	created_at TIMESTAMP
 );
 
--- 구직자-분야 관계 테이블
-CREATE TABLE user_category(
-	user_category_id INT AUTO_INCREMENT PRIMARY KEY,
-	user_category_category_id INT NOT NULL,
-	user_category_user_id NOT NULL 
-);
 
 -- 분야
 CREATE TABLE category (
 	category_id int auto_increment PRIMARY KEY,
-	category_name VARCHAR(50) UNIQUE NOT NULL
-);
-
--- 회사-분야 관계 테이블
-CREATE TABLE company_category(
-	company_category_id INT AUTO_INCREMENT PRIMARY KEY,
-	company_category_category_id INT NOT NULL,
-	company_category_company_id NOT NULL 
+	category_user_id int,
+	category_company_id int,
+	category_name VARCHAR(50)NOT NULL
 );
 
 -- 회사 
@@ -50,41 +38,28 @@ CREATE TABLE company (
 	company_email VARCHAR(120) UNIQUE NOT null,
 	company_phone_number VARCHAR(100) NOT null,
 	company_address VARCHAR(150) NOT null,
-	company_category VARCHAR(80)
 	company_created_at TimeStamp
 );
 
 -- 이력서 
 CREATE TABLE resume(
 	resume_id INT AUTO_INCREMENT PRIMARY KEY,
+	resume_title VARCHAR(50),
 	resume_education VARCHAR(50),
 	resume_career VARCHAR(50),
 	resume_photo VARCHAR(500),
-	resume_job VARCHAR(50) NOT null,
 	resume_link VARCHAR(500), 
 	resume_user_id INT,
 	resume_readcount INT,
 	resume_created_at TIMESTAMP
 );
 
--- 이력서-직무 관계 테이블
-CREATE TABLE resume_job(
-	resume_job_id INT AUTO_INCREMENT PRIMARY KEY,
-	resume_job_job_id INT NOT NULL,
-	resume_job_resume_id INT NOT NULL 
-);
-
 -- 직무
 CREATE TABLE job(
 	job_id INT AUTO_INCREMENT PRIMARY KEY,
-	job_name VARCHAR(50) UNIQUE NOT NULL
-);
-
--- 공고-직무 관계 테이블
-CREATE TABLE recruit_job(
-	recruit_job_id INT AUTO_INCREMENT PRIMARY KEY,
-	recruit_job_job_id INT NOT NULL,
-	recruit_job_recruit_id INT NOT NULL 
+	job_resume_id INT,
+	job_recruit_id INT,
+	job_name VARCHAR(50) NOT NULL
 );
 
 -- 채용 공고 
@@ -132,7 +107,7 @@ CREATE TABLE comment(
 
 -- 관심 기업 구독
 CREATE TABLE subscribe(
-	subscribe_id int auto_increment PRIMARY KEY,
+	subscribe_id INT auto_increment PRIMARY KEY,
 	subscribe_user_id INT,
 	subscribe_company_id INT,
 	subscribe_created_at TIMESTAMP
@@ -157,24 +132,8 @@ CREATE TABLE chatting(
 
 ### fk 제약조건
 ```sql
--- 구직자-분야 관계 테이블 fk
-ALTER TABLE resume ADD FOREIGN KEY(user_category_category_id) REFERENCES category(category_id);
-ALTER TABLE resume ADD FOREIGN KEY(user_category_user_id) REFERENCES user(user_id);
-
--- 회사-분야 관계 테이블 fk
-ALTER TABLE resume ADD FOREIGN KEY(company_category_category_id) REFERENCES category(category_id);
-ALTER TABLE resume ADD FOREIGN KEY(company_category_company_id) REFERENCES user(user_id);
-
 -- 이력서 테이블 fk
 ALTER TABLE resume ADD FOREIGN KEY(resume_user_id) REFERENCES user(user_id);
-
--- 이력서-직무 관계 테이블 fk
-ALTER TABLE resume_job ADD FOREIGN KEY(resume_job_id) REFERENCES job(job_id);
-ALTER TABLE resume_job ADD FOREIGN KEY(resume_job_resume_id) REFERENCES resume(resume_id);
-
--- 공고-직무 관계 테이블 fk
-ALTER TABLE recruit_job ADD FOREIGN KEY(recruit_job_job_id) REFERENCES job(job_id);
-ALTER TABLE recruit_job ADD FOREIGN KEY(recruit_job_recruit_id) REFERENCES recruit(recruit_id);
 
 -- 채용 공고 테이블 fk
 ALTER TABLE recruit ADD FOREIGN KEY(recruit_company_id) REFERENCES company(company_id);
